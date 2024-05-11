@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shimmie2;
 
 require_once "config.php";
+require_once "danbooru.php";
 
 /**
  * Occurs when some data is being uploaded.
@@ -336,6 +337,12 @@ class Upload extends Extension
      */
     private function try_transload(string $url, int $slot, array $metadata): array
     {
+        $dt = new DanbooruTransloader();
+        if ($dt->accept($url)) {
+            $dt->enrich_metadata($url, $slot, $metadata);
+            $url = $metadata['url'.$slot];
+        }
+
         global $page, $config, $user, $database;
 
         $results = [];
