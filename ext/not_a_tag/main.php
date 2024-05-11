@@ -92,7 +92,8 @@ class NotATag extends Extension
 
         $ok_tags = [];
         foreach ($tags as $tag) {
-            if (!in_array(strtolower($tag), $untags)) {
+            $only_tag = preg_replace('/^.*:/', '', $tag);  // remove category
+            if (!in_array(strtolower($only_tag), $untags)) {
                 $ok_tags[] = $tag;
             }
         }
