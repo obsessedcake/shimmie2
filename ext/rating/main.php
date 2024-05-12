@@ -37,6 +37,7 @@ function add_rating(ImageRating $rating): void
 
 add_rating(new ImageRating("?", "Unrated", "unrated", 99999));
 add_rating(new ImageRating("s", "Safe", "safe", 0));
+add_rating(new ImageRating("c", "Sensitive", "sensitive", 250));
 add_rating(new ImageRating("q", "Questionable", "questionable", 500));
 add_rating(new ImageRating("e", "Explicit", "explicit", 1000));
 /** @noinspection PhpIncludeInspection */

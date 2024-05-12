@@ -6,8 +6,8 @@ namespace Shimmie2;
 
 class DanbooruTransloader
 {
-    private static string $TAG_CATEGORY_PREFIX = 'tag_string_';
-    private static string $TAG_SERIES_PREFIX = '_(series)';
+    private const TAG_CATEGORY_PREFIX = 'tag_string_';
+    private const TAG_SERIES_PREFIX = '_(series)';
 
     public static function accept(string $url): bool
     {
@@ -21,7 +21,7 @@ class DanbooruTransloader
 
         $final_tags = [];
         foreach ($json as $key => $value) {
-            if (!str_starts_with($key, self::$TAG_CATEGORY_PREFIX)) {
+            if (!str_starts_with($key, self::TAG_CATEGORY_PREFIX)) {
                 continue;
             }
 
@@ -29,7 +29,7 @@ class DanbooruTransloader
                 continue;
             }
 
-            $tag_category = substr($key, strlen(self::$TAG_CATEGORY_PREFIX)) . ':';
+            $tag_category = substr($key, strlen(self::TAG_CATEGORY_PREFIX)) . ':';
             if ($tag_category === 'general:') {
                 $final_tags[] = $value;
                 continue;
@@ -91,7 +91,8 @@ class DanbooruTransloader
         switch ($rating) {
             case 'g':           // general -> safe
                 return 's';
-            case 's':           // sensitive -> questionable
+            case 's':           // sensitive -> sensitive
+                return 'c';
             case 'q':           // questionable -> questionable
                 return 'q';
             case 'e':           // explicit -> questionable
