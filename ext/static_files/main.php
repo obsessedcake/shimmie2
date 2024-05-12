@@ -12,6 +12,8 @@ class RobotsBuildingEvent extends Event
         // Site is rate limited to 1 request / sec,
         // returns 503 for more than that
         "Crawl-delay: 3",
+        // Robots should not visit any pages on the site. 
+        "Disallow: /",
     ];
 
     public function add_disallow(string $path): void
