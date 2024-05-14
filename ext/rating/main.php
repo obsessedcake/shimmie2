@@ -40,6 +40,7 @@ add_rating(new ImageRating("s", "Safe", "safe", 0));
 add_rating(new ImageRating("c", "Sensitive", "sensitive", 250));
 add_rating(new ImageRating("q", "Questionable", "questionable", 500));
 add_rating(new ImageRating("e", "Explicit", "explicit", 1000));
+add_rating(new ImageRating("v", "Void", "void", 100000));
 /** @noinspection PhpIncludeInspection */
 @include_once "data/config/ratings.conf.php";
 

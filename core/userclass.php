@@ -94,13 +94,13 @@ unset($_all_false);
 
 // Ghost users can't do anything
 new UserClass("ghost", "base", [
-    Permissions::READ_PM => true,
+    Permissions::HELLBANNED => true,
 ]);
 
 // Anonymous users can't do anything by default, but
 // the admin might grant them some permissions
 new UserClass("anonymous", "base", [
-    Permissions::CREATE_USER => true,
+    Permissions::HELLBANNED => true,
 ]);
 
 new UserClass("user", "base", [
