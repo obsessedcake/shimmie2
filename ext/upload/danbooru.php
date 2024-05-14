@@ -14,10 +14,12 @@ class DanbooruTransloader
     public static function enrich_metadata(string $url, int $slot, array &$metadata): void
     {
         $json_url = self::clean_url($url).'.json';
+
         $raw_json = self::fetch($json_url);
+        $json = json_decode($raw_json, true);
 
         $tags = [];
-        foreach (json_decode($raw_json, true) as $key => $value) {
+        foreach ($json as $key => $value) {
             if (empty($value)) {
                 continue;
             }
@@ -51,7 +53,7 @@ class DanbooruTransloader
         $metadata['rating'.$slot] = self::convert_rating($json['rating']);
         $metadata['source'.$slot] = self::clean_url($json['source']);
         $metadata['tags'.$slot] = implode(' ', $tags);
-        $metadata['url'.$slot] = $json['file_url'];
+        $metadata['url'.$slot] = $json['large_file_url'];
     }
 
     /**
@@ -63,7 +65,7 @@ class DanbooruTransloader
         return $url_parts['scheme'] . '://' . $url_parts['host'] . $url_parts['path'];
     }
 
-    private static function fetch(string $url): array
+    private static function fetch(string $url): string
     {
         $ch = curl_init($url);
         assert($ch !== false);
